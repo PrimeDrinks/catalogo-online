@@ -7,8 +7,8 @@
 
   <!-- PWA -->
   <meta name="theme-color" content="#0f4fa8" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
 
   <style>
     :root {
@@ -1250,7 +1250,7 @@
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker
-        .register("/sw.js")
+        .register("sw.js")
         .catch((err) => {
           console.log("Falha ao registrar o service worker:", err);
         });
@@ -1260,5 +1260,6 @@
 
 </body>
 </html>
+
 
 
