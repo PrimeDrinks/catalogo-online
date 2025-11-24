@@ -1,3 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catálogo – Prime Drinks Express</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#0f4fa8" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+
+  <style>
+    /* Título "PEDIDOS ONLINE" com efeito neon + gradiente + contorno + sombra + animação */
+    .titulo-destaque-neon {
+      font-size: 2.1rem;                 /* ligeiramente maior */
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+
+      /* GRADIENTE aplicado no texto */
+      background: linear-gradient(90deg, #facc15, #fb923c, #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      /* CONTORNO do texto */
+      -webkit-text-stroke: 1px rgba(15, 23, 42, 0.9);
+      text-stroke: 1px rgba(15, 23, 42, 0.9);
+
+      /* SOMBRA / GLOW estilo neon */
+      text-shadow:
+        0 0 6px rgba(250, 204, 21, 0.8),
+        0 0 12px rgba(249, 115, 22, 0.7),
+        0 0 18px rgba(249, 115, 22, 0.4);
+
+      /* ANIMAÇÃO pulsante */
+      animation: neonPulse 1.8s ease-in-out infinite;
+    }
+
+    /* Animação – respira, aumenta/brilha e volta */
+    @keyframes neonPulse {
+      0% {
+        transform: scale(1);
+        text-shadow:
+          0 0 4px rgba(250, 204, 21, 0.7),
+          0 0 8px rgba(249, 115, 22, 0.5),
+          0 0 12px rgba(249, 115, 22, 0.3);
+      }
+      50% {
+        transform: scale(1.04);
+        text-shadow:
+          0 0 8px rgba(250, 204, 21, 1),
+          0 0 16px rgba(249, 115, 22, 0.9),
+          0 0 26px rgba(249, 115, 22, 0.6);
+      }
+      100% {
+        transform: scale(1);
+        text-shadow:
+          0 0 4px rgba(250, 204, 21, 0.7),
+          0 0 8px rgba(249, 115, 22, 0.5),
+          0 0 12px rgba(249, 115, 22, 0.3);
+      }
+    }
+
+    :root {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #0f172a;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0f4fa8, #1d73d6);
+      color: white;
+      padding: 24px 16px 28px;
+      text-align: left;
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header h1 {
+      margin: 4px 0 8px;
+      font-size: 1.9rem;
+      font-weight: 800;
+    }
+
+    .badge-Localidade {
+      margin-top: 10px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      max-width: 650px;
+    }
+
+    .header-info {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      opacity: 0.95;
+    }
+
+    /* PROMOÇÃO EM DESTAQUE */
+    .promo-section {
+      max-width: 900px;
+      margin: 10px auto 0;
+      padding: 0 16px 8px;
+    }
+
+    .promo-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #1f2937;
+    }
+
+    .promo-card {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      border-radius: 16px;
+      padding: 10px 14px;
+      color: #fff7ed;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .promo-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
+    .promo-name {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .promo-desc {
+      font-size: 0.85rem;
+      opacity: 0.95;
+    }
+
+    .promo-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .promo-price {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .promo-btn {
+      background: #22c55e;
+      color: white;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .promo-btn:hover {
+      filter: brightness(0.93);
+    }
+
+    /* FILTROS (busca + categoria) */
+    .filters {
+      max-width: 900px;
+      margin: 14px auto 0;
+      padding: 0 16px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid #cbd5f5;
+      background: white;
+      font-size: 0.9rem;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .filters input:focus,
+    .filters select:focus {
+      border-color: #1d4ed8;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+    }
+
+    @media (min-width: 640px) {
+      .filters {
+        flex-direction: row;
+      }
+      .filters input {
+        flex: 2;
+      }
+      .filters select {
+        flex: 1;
+      }
+    }
+
+    /* ATALHOS POR CATEGORIA */
+    .category-shortcuts {
+      max-width: 900px;
+      margin: 4px auto 0;
+      padding: 0 16px 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cat-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid #cbd5f5;
+      background: white;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .cat-pill-active {
+      background: #0f4fa8;
+      color: white;
+      border-color: #0f4fa8;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 12px 16px 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 130px;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .card-body {
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .category {
+      font-size: 0.8rem;
+      background: #e0edff;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .price {
+      color: #16a34a;
+      font-weight: bold;
+      margin-top: 2px;
+      font-size: 0.95rem;
+    }
+
+    .stock {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .stock-zero {
+      font-size: 0.8rem;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .card-footer {
+      padding: 0 10px 10px;
+      margin-top: auto;
+    }
+
+    .qty-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .qty-row input[type="number"] {
+      width: 70px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.9rem;
+    }
+
+    .btn-add {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: none;
+      background: #0f4fa8;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-add:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-add-disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* CARRINHO */
+    .cart {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      padding: 12px 16px 16px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+    }
+
+    .store-status {
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .store-open {
+      color: #16a34a;
+    }
+
+    .store-closed {
+      color: #b91c1c;
+    }
+
+    .cart-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cart-items {
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .cart-empty {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      padding: 4px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+    }
+
+    .cart-item-qty {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .cart-item-right {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .cart-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    .cart-summary strong {
+      font-size: 1rem;
+      color: #16a34a;
+    }
+
+    .btn-whatsapp-cart {
+      margin-top: 10px;
+      width: 100%;
+      background: #25d366;
+      color: white;
+      padding: 10px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp-cart:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .cart-hint {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6b7280;
+      padding: 8px 0 14px;
+    }
+
+    .delivery-neighborhood-group,
+    .payment-group,
+    .order-type-group,
+    .notes-group {
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .delivery-neighborhood-group select,
+    .payment-group select,
+    .order-type-group select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.9rem;
+    }
+
+    .payment-group small {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .notes-group textarea {
+      width: 100%;
+      min-height: 60px;
+      resize: vertical;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+
+    .cart-summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <img src="logo-prime.png"
+         alt="Logo Prime Drinks Express"
+         style="width: 110px; height: auto; border-radius: 12px;">
+
+    <div class="header-text">
+      <h1 class="titulo-destaque-neon">PEDIDOS ONLINE</h1>
+      <h1>Prime Drinks Express</h1>
+      <h1>Bebidas Express no preço (em breve em Várzea da Abelha)</h1>
+      <p class="badge-Localidade">
+        Atendendo na Várzea da Abelha e região • Faça seu Pedido e envie para o WhatsApp 98684-7828 • Cobramos taxa de entrega
+      </p>
+      <div class="header-info">
+        Monte seu pedido aqui e clique em <strong>“Finalizar pedido no WhatsApp”</strong> para combinar pagamento e entrega.
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROMOÇÃO EM DESTAQUE (combo) -->
+<section id="promoSection" class="promo-section">
+  <div class="promo-title">🔥 Promoção em destaque</div>
+  <div id="promoCard" class="promo-card"></div>
+</section>
+
+<!-- FILTROS: BUSCA + CATEGORIA -->
+<div class="filters">
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="Pesquisar pelo nome da bebida (ex.: Heineken, Coca, Skol)..."
+  />
+  <select id="categoryFilter">
+    <option value="">Todas as categorias</option>
+  </select>
+</div>
+
+<!-- ATALHOS POR CATEGORIA -->
+<div class="category-shortcuts" id="categoryShortcuts"></div>
+
+<main>
+  <!-- LISTA DE PRODUTOS -->
+  <div class="grid" id="productList"></div>
+
+  <!-- CARRINHO -->
+  <section class="cart">
+    <div id="storeStatus" class="store-status"></div>
+
+    <div class="cart-title">Seu pedido</div>
+
+    <!-- Tipo de pedido: Retirada / Entrega -->
+    <div class="order-type-group">
+      <label for="orderType">Como você prefere receber?</label>
+      <select id="orderType">
+        <option value="entrega">Entrega em domicílio</option>
+        <option value="retirada">Retirar no local</option>
+      </select>
+    </div>
+
+    <!-- Forma de pagamento -->
+    <div class="payment-group">
+      <label for="paymentMethod">Forma de pagamento:</label>
+      <select id="paymentMethod">
+        <option value="">Selecione</option>
+      </select>
+      <small>Pagamentos no crédito têm acréscimo da maquininha sobre o total (produtos + entrega).</small>
+    </div>
+
+    <!-- Localidade -->
+    <div class="delivery-neighborhood-group">
+      <label for="deliveryNeighborhood">Localidade para entrega:</label>
+      <select id="deliveryNeighborhood">
+        <option value="">Selecione a localidade/bairro</option>
+      </select>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <!-- Subtotal / Entrega / Crédito / Total -->
+    <div class="cart-summary-line">
+      <span>Subtotal:</span>
+      <span id="cartSubtotal">R$ 0,00</span>
+    </div>
+    <div class="cart-summary-line">
+      <span>Entrega:</span>
+      <span id="cartDelivery">R$ 0,00</span>
+    </div>
+    <div class="cart-summary-line">
+      <span>Acréscimo crédito:</span>
+      <span id="cartCreditFee">R$ 0,00</span>
+    </div>
+
+    <div class="cart-summary">
+      <span>Total:</span>
+      <strong id="cartTotal">R$ 0,00</strong>
+    </div>
+
+    <!-- Observações -->
+    <div class="notes-group">
+      <label for="orderNotes">Observações do pedido (opcional):</label>
+      <textarea
+        id="orderNotes"
+        placeholder="Ex.: ponto de referência, troco para 100, mandar bem gelada, etc."
+      ></textarea>
+    </div>
+
+    <button id="whatsCartButton" class="btn-whatsapp-cart" disabled>
+      Finalizar pedido no WhatsApp
+    </button>
+
+    <p class="cart-hint">
+      Ao clicar no botão, abriremos o WhatsApp com o resumo do seu pedido. Você poderá confirmar, combinar pagamento (ex.: PIX, cartão, dinheiro) e entrega diretamente com o atendente.
+    </p>
+  </section>
+</main>
+
+<footer>
+  Catálogo desenvolvido para Prime Drinks Express • Compartilhe com seus clientes
+</footer>
+
 <script>
   // Número do WhatsApp
   const WHATSAPP_NUMBER = "5585988743547";
@@ -65,7 +716,7 @@
   // Carrinho
   const cart = [];
 
-  // 🔹 Decide qual preço usar (normal ou atacado) com base na quantidade no carrinho
+  // Decide qual preço usar (normal ou atacado) com base na quantidade no carrinho
   function getEffectiveUnitPrice(cartItem) {
     const product = products.find(p => p.id == cartItem.id);
     if (!product) {
@@ -137,7 +788,7 @@
     return rows;
   }
 
-  // Carregar produtos da aba Produtos (AGORA COM ATACADO)
+  // Carregar produtos da aba Produtos (com atacado)
   async function loadProductsFromSheet() {
     const res = await fetch(PRODUCTS_SHEET_URL);
     const csv = await res.text();
@@ -151,11 +802,11 @@
       const estoqueStr = row.estoque || "0";
       const estoque = parseInt(estoqueStr, 10) || 0;
 
-      // 🔹 NOVO: preço atacado
+      // preço atacado
       const precoAtacadoStr = row.preco_atacado || row["preco_atacado"] || "0";
       const priceAtacado = parseFloat(precoAtacadoStr.replace(".", "").replace(",", ".")) || 0;
 
-      // 🔹 NOVO: quantidade mínima para atacado
+      // quantidade mínima para atacado
       const minAtacadoStr = row.quantidade_minima_atacado || row["quantidade_minima_atacado"] || "0";
       const atacadoMinQty = parseInt(minAtacadoStr, 10) || 0;
 
@@ -169,9 +820,9 @@
       return {
         id: row.id,
         name: row.nome,
-        price,                 // preço normal (varejo)
-        priceAtacado,          // 🔹 preço atacado
-        atacadoMinQty,         // 🔹 quantidade mínima para atacado
+        price,                 // preço normal
+        priceAtacado,          // preço atacado
+        atacadoMinQty,         // quantidade mínima atacado
         category: row.categoria || "",
         estoque,
         image: img || "logo-prime.png",
@@ -680,3 +1331,19 @@
     setInterval(checkStoreOpen, 60000);
   });
 </script>
+
+<!-- Registro do Service Worker para PWA -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("sw.js")
+        .catch((err) => {
+          console.log("Falha ao registrar o service worker:", err);
+        });
+    });
+  }
+</script>
+
+</body>
+</html>
