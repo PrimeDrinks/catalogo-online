@@ -11,6 +11,58 @@
   <link rel="icon" href="icons/icon-192.png" />
 
   <style>
+    /* Título "PEDIDOS ONLINE" com efeito neon + gradiente + contorno + sombra + animação */
+.titulo-destaque-neon {
+  font-size: 2.1rem;                 /* ligeiramente maior */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  /* GRADIENTE aplicado no texto */
+  background: linear-gradient(90deg, #facc15, #fb923c, #f97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* CONTORNO do texto (pode ajustar a cor se quiser) */
+  -webkit-text-stroke: 1px rgba(15, 23, 42, 0.9);  /* azul bem escuro */
+  text-stroke: 1px rgba(15, 23, 42, 0.9);
+
+  /* SOMBRA / GLOW estilo neon */
+  text-shadow:
+    0 0 6px rgba(250, 204, 21, 0.8),
+    0 0 12px rgba(249, 115, 22, 0.7),
+    0 0 18px rgba(249, 115, 22, 0.4);
+
+  /* ANIMAÇÃO pulsante */
+  animation: neonPulse 1.8s ease-in-out infinite;
+}
+
+/* Animação – respira, aumenta/brilha e volta */
+@keyframes neonPulse {
+  0% {
+    transform: scale(1);
+    text-shadow:
+      0 0 4px rgba(250, 204, 21, 0.7),
+      0 0 8px rgba(249, 115, 22, 0.5),
+      0 0 12px rgba(249, 115, 22, 0.3);
+  }
+  50% {
+    transform: scale(1.04);
+    text-shadow:
+      0 0 8px rgba(250, 204, 21, 1),
+      0 0 16px rgba(249, 115, 22, 0.9),
+      0 0 26px rgba(249, 115, 22, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow:
+      0 0 4px rgba(250, 204, 21, 0.7),
+      0 0 8px rgba(249, 115, 22, 0.5),
+      0 0 12px rgba(249, 115, 22, 0.3);
+  }
+}
+
     :root {
       font-family: Arial, sans-serif;
       background: #f3f4f6;
@@ -483,7 +535,7 @@
          style="width: 110px; height: auto; border-radius: 12px;">
 
     <div class="header-text">
-      <h1>PEDIDOS ONLINE</h1>
+      <h1 class="titulo-destaque-neon">PEDIDOS ONLINE</h1>
       <h1>Prime Drinks Express</h1>
       <h1>Bebidas Express no preço (em breve em Várzea da Abelha)</h1>
       <p class="badge-Localidade">
@@ -1260,6 +1312,7 @@
 
 </body>
 </html>
+
 
 
 
