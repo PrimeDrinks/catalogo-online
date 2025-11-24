@@ -2,7 +2,6 @@
 
 const CACHE_NAME = "prime-drinks-v1";
 const ASSETS_TO_CACHE = [
-  const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./logo-prime.png",
@@ -40,4 +39,5 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
