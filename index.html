@@ -651,7 +651,7 @@
 
 <script>
   // Número do WhatsApp
-  const WHATSAPP_NUMBER = "5585988743547";
+  const WHATSAPP_NUMBER = "5585986847828";
 
   // Links das planilhas (CSV)
   const PRODUCTS_SHEET_URL =
@@ -662,7 +662,7 @@
 
   // Horário de funcionamento
   const SCHEDULE_TEXT =
-    "Terça a Sábado: 8h às 22h; domingo 9h às 21h; segunda: fechado.";
+    "Terça a Sábado: 8h às 23h; domingo 9h às 21h; segunda: fechado.";
 
   let isOpenNow = true;
 
@@ -678,7 +678,7 @@
       case 4: // Quinta
       case 5: // Sexta
       case 6: // Sábado
-        return hour >= 8 && hour < 22;
+        return hour >= 8 && hour < 23;
       case 0: // Domingo
         return hour >= 9 && hour < 21;
       default:
@@ -962,7 +962,7 @@
       <div class="promo-label">Oferta especial • Hoje</div>
       <div class="promo-name">${promoProduct.name}</div>
       <div class="promo-desc">
-        Combo perfeito para o fim de semana na Prime Drinks Express. Ideal para reunir a galera e tomar aquela gelada! Válido até durar estoque.
+        Promoção assim, só na Prime Drinks Express. Aproveite antes que acabe! Válido até durar estoque.
       </div>
       <div class="promo-bottom">
         <div class="promo-price">${priceText}</div>
@@ -1347,3 +1347,4 @@
 
 </body>
 </html>
+
